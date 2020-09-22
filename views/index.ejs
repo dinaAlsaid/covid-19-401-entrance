@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <section>
+        <a href="/allCountries"> all Countries</a>
+    </section>
+    <section>
+        <div>Total confirmed cases: <%= confirmed%></div>
+        <div>Total deaths: <%= deaths%></div>
+        <div>Total recoverded cases: <%= recovered%></div>
+    </section>
+    <section>
+        <form action="/getCountryResult" method="post">
+            <input type="text" name="country">
+            <input type="date" name="start" >
+            <input type="date" name="end" >
+            <input type="submit" value="search">
+        </form>
+    </section>
+</body>
+</html>
