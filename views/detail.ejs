@@ -16,12 +16,12 @@
                 <p>date : <%= item.date%></p>
             
             <form action="/update/<%=item.id%>?_method=put" method="post">
-                <input type="text" name="country" value="<%= item.country %>" hidden>
-                <input type="text" name="code" value="<%= item.code %>" hidden>
-                <input type="text" name="confirmed" value="<%= item.confirmed_cases%>" hidden>
-                <input type="number" name="deaths" value="<%= item.deaths%>" hidden>
-                <input type="number" name="recovered" value="<%= item.total_recovered%>" hidden>
-                <input type="text" name="date" value="<%= item.date%>" hidden>
+                <input type="text" name="country" value="<%= item.country %>">
+                <input type="text" name="code" value="<%= item.code %>">
+                <input type="text" name="confirmed" value="<%= item.confirmed_cases%>">
+                <input type="number" name="deaths" value="<%= item.deaths%>">
+                <input type="number" name="recovered" value="<%= item.total_recovered%>">
+                <input type="text" name="date" value="<%= item.date%>">
                 <input type="submit" value="update">
             </form>
             </div>

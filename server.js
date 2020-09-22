@@ -81,7 +81,7 @@ function updateFunc(req,res){
     let id=req.params.id;
     let {country, code, conf, deaths ,recovered, date}=req.body;
     let safeval=[country, code, conf, deaths ,recovered, date,id]
-    let sql = 'UPDATE covid set country=$1, code=$2, confirmed_cases=$3, deaths=$4 ,total_recovered=$5, date=$6 WHERE id=$6;'
+    let sql = 'UPDATE covid set country=$1, code=$2, confirmed_cases=$3, deaths=$4 ,total_recovered=$5, date=$6 WHERE id=$7;'
     client.query(sql,safeval).then((reults)=>{
         res.redirect('/myRecords');
   
