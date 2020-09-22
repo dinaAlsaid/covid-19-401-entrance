@@ -22,6 +22,8 @@ app.post('/getCountryResult', countryResultFunc);
 app.get('/allCountries', allCountriesFunc);
 app.post('/Record', RecordFunc);
 app.get('/myRecords', myRecordsFunc);
+app.post('/detail/:id',detailFunc);
+app.put('/update/:id', updateFunc)
 
 function mainFunc(req,res){
     let url = 'https://api.covid19api.com/world/total';
@@ -58,16 +60,44 @@ function RecordFunc(req,res){
     })
 }
 function myRecordsFunc(req,res){
-    res.render('')
+    let sql = 'select * from covid;'
+    client.query(sql).then((reults)=>{
+        res.render('records',{data: reults.rows})
+  
+    })
+}
+function detailFunc(req,res){
+    let id=req.params.id;
+    let safeval=[id]
+    let sql = 'select * from covid WHERE id=$1;'
+    client.query(sql,safeval).then((reults)=>{
+        console.log(reults.rows);
+        res.render('detail',{data: reults.rows});
+  
+    })
+
+}
+function updateFunc(req,res){
+    let id=req.params.id;
+    let {country, code, conf, deaths ,recovered, date}=req.body;
+    let safeval=[country, code, conf, deaths ,recovered, date,id]
+    let sql = 'UPDATE covid set country=$1, code=$2, confirmed_cases=$3, deaths=$4 ,total_recovered=$5, date=$6 WHERE id=$6;'
+    client.query(sql,safeval).then((reults)=>{
+        res.redirect('/myRecords');
+  
+    })
+ 
 }
 
+
+// constructor
 function CountryStat (data){
     this.country=data.Country
-    this.code=data.CountryCode
-    this.confirmed_cases=data.TotalConfirmed
-    this.deaths=data.TotalDeaths
-    this.total_recovered=data.TotalRecovered
-    this.date=data.Date
+    this.code=data.CountryCode || '';
+    this.confirmed_cases=data.TotalConfirmed || 0;
+    this.deaths=data.TotalDeaths || 0;
+    this.total_recovered=data.TotalRecovered || 0;
+    this.date=data.Date || '';
 }
 client.connect().then(()=>{
     app.listen(PORT,()=>{

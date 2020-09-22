@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All countries</title>
+    <title>Document</title>
 </head>
 <body>
-
     <section>
-        <% statArr.forEach((item)=>{%>
+        <% data.forEach((item)=>{%>
             <div>
                 <h2>Country <%= item.code %>,<%= item.country %></h2>
                 <p>Total confirmed cases : <%= item.confirmed_cases%></p>
                 <p>Total death cases : <%= item.deaths%></p>
                 <p>Total recovered cases : <%= item.total_recovered%></p>
                 <p>date : <%= item.date%></p>
-            <form action="/Record" method="post">
+            
+            <form action="/update/<%=item.id%>?_method=put" method="post">
                 <input type="text" name="country" value="<%= item.country %>" hidden>
                 <input type="text" name="code" value="<%= item.code %>" hidden>
                 <input type="text" name="confirmed" value="<%= item.confirmed_cases%>" hidden>
                 <input type="number" name="deaths" value="<%= item.deaths%>" hidden>
                 <input type="number" name="recovered" value="<%= item.total_recovered%>" hidden>
                 <input type="text" name="date" value="<%= item.date%>" hidden>
-                <input type="submit" value="add to my records">
+                <input type="submit" value="update">
             </form>
             </div>
         <%})%>
